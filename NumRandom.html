@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador Numeros Pares e impares</title>
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  #container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 5px;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .num {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+  }
+</style>
+<body>
+  <h1>Generador de Números</h1>
+  <p>Ingresa un número y presiona "Generar números"</p>
+  <input type="text" id="numInput" placeholder="Ingresa un número">
+  <button onclick="generarNumeros()">Generar números</button>
+
+  <div id="container"></div>
+</body>
+<script>
+
+  function esPrimo(num) {
+    if (num < 2) return false; 
+    for (let j = 2; j <= Math.sqrt(num); j++) {
+        if (num % j === 0) return false;
+    }
+    return true;
+}
+
+function generarNumeros(){
+  const container = document.getElementById('container');
+  container.innerHTML = '';
+  const input = document.getElementById('numInput').value;
+  const cantidad = parseInt(input);
+
+    if(isNaN(cantidad) ||  cantidad <=0){
+      alert("Por favor agrega un numero valido");
+      return;
+    
+}
+
+
+    for(let i =0; i <= cantidad; i++){
+     let num = document.createElement('div')
+      num.className = 'num'
+      num.textContent = i;
+
+       if (esPrimo(i)) {
+        num.style.backgroundColor = "red";  
+    } else if (i % 2 === 0) {
+        num.style.backgroundColor = "green"; 
+    } else {
+        num.style.backgroundColor = "yellow"; 
+    }
+            container.appendChild(num);
+  }
+    }
+</script>
+</html>
